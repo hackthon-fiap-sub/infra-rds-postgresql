@@ -1,0 +1,13 @@
+postgres_identifier    = "rds-selectgearmotors"
+postgres_database      = "selectgearmotorsdb"
+postgres_owner         = "postgres"
+postgres_name          = "postgres"
+postgres_db_username   = "postgres"
+postgres_user_name     = "sevenuser"
+postgres_user_password = "Postgres2019!"
+postgres_instance_name = "rds-selectgearmotors"
+postgres_db_password   = "Postgres2019!"
+postgres_port          = "5432"
+aws_region             = "us-east-1"
+vpc_id                 = "vpc-04308bc5185e0f872"
+subnet_ids             = ["subnet-03ef2390558a998a9", "subnet-018e6bd3ea3115b87"]

@@ -1,4 +1,4 @@
 
 output "endpoint" {
-  value = aws_db_instance.rds-healthmed.endpoint
+  value = aws_db_instance.rds-selectgearmotors.endpoint
 }
