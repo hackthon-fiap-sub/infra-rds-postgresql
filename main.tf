@@ -22,7 +22,7 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region # Ajustado para usar a variável
+  region = var.aws_region
 }
 
 provider "postgresql" {
@@ -35,9 +35,6 @@ provider "postgresql" {
   connect_timeout = 15
   superuser       = false
   expected_version = aws_db_instance.rds-selectgearmotors.engine_version
-
-  # Certifique-se de que a dependência da instância do DB seja respeitada
-  depends_on = [aws_db_instance.rds-selectgearmotors]
 }
 
 resource "aws_db_subnet_group" "rdssubnetv1" {
@@ -57,7 +54,7 @@ resource "aws_security_group" "rdssecurityv1" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Considere restringir o acesso a IPs específicos por segurança
+    cidr_blocks = ["0.0.0.0/0"] # Consider restricting to specific IPs for security
   }
 
   egress {
@@ -97,4 +94,7 @@ resource "postgresql_database" "selectgearmotors-database" {
   connection_limit  = -1
   allow_connections = true
   template          = "template0"
+
+  # Ensure this resource waits for the DB instance to be created
+  depends_on = [aws_db_instance.rds-selectgearmotors]
 }
