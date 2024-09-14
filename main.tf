@@ -37,24 +37,19 @@ provider "postgresql" {
   expected_version = aws_db_instance.rds-selectgearmotors.engine_version
 }
 
-resource "aws_db_subnet_group" "rdssubnetv1" {
-  name       = "rdssubnetv1"
-  subnet_ids = var.subnet_ids
-  tags = {
-    Name = "rdssubnetv1"
-  }
-}
+# Use an existing VPC and subnet group, no need to create a new one
+# If you need to use an existing security group, you can reference its ID directly.
 
 resource "aws_security_group" "rdssecurityv1" {
   name        = "rdssecuritygroupv1"
   description = "Security group for RDS"
-  vpc_id      = var.vpc_id
+  vpc_id      = var.vpc_id # Existing VPC ID
 
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Consider restricting to specific IPs for security
+    cidr_blocks = ["0.0.0.0/0"] # Adjust for security as needed
   }
 
   egress {
@@ -78,8 +73,8 @@ resource "aws_db_instance" "rds-selectgearmotors" {
   identifier           = local.postgres_identifier
   username             = local.postgres_db_username
   password             = local.postgres_user_password
-  db_subnet_group_name = aws_db_subnet_group.rdssubnetv1.name
-  vpc_security_group_ids = [aws_security_group.rdssecurityv1.id]
+  db_subnet_group_name = var.db_subnet_group_name # Use existing subnet group
+  vpc_security_group_ids = [aws_security_group.rdssecurityv1.id] # Or an existing SG ID
   skip_final_snapshot  = true
   publicly_accessible  = true
   tags = {

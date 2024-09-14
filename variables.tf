@@ -64,3 +64,8 @@ variable "subnet_ids" {
   description = "List of subnet IDs for RDS"
   type        = list(string)
 }
+
+variable "db_subnet_group_name" {
+  description = "The name of the existing DB subnet group"
+  type        = string
+}

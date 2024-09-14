@@ -11,3 +11,5 @@ postgres_port          = "5432"
 aws_region             = "us-east-1"
 vpc_id                 = "vpc-04308bc5185e0f872"
 subnet_ids             = ["subnet-03ef2390558a998a9", "subnet-018e6bd3ea3115b87"]
+db_subnet_group_name   = "rdssubnetv1"
+
