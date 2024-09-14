@@ -41,7 +41,7 @@ provider "postgresql" {
 # If you need to use an existing security group, you can reference its ID directly.
 
 resource "aws_security_group" "rdssecurityv2" {
-  name        = "rdssecuritygroupv1"
+  name        = "rdssecuritygroupv2"
   description = "Security group for RDS"
   vpc_id      = var.vpc_id # Existing VPC ID
 
@@ -74,7 +74,7 @@ resource "aws_db_instance" "rds-selectgearmotors" {
   username             = local.postgres_db_username
   password             = local.postgres_user_password
   db_subnet_group_name = var.db_subnet_group_name # Use existing subnet group
-  vpc_security_group_ids = [aws_security_group.rdssecurityv1.id] # Or an existing SG ID
+  vpc_security_group_ids = [aws_security_group.rdssecurityv2.id] # Or an existing SG ID
   skip_final_snapshot  = true
   publicly_accessible  = true
   tags = {
