@@ -40,7 +40,7 @@ provider "postgresql" {
 # Use an existing VPC and subnet group, no need to create a new one
 # If you need to use an existing security group, you can reference its ID directly.
 
-resource "aws_security_group" "rdssecurityv1" {
+resource "aws_security_group" "rdssecurityv2" {
   name        = "rdssecuritygroupv1"
   description = "Security group for RDS"
   vpc_id      = var.vpc_id # Existing VPC ID
